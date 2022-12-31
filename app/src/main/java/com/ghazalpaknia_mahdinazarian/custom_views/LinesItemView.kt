@@ -13,6 +13,7 @@ class LinesItemView(
     context: Context,
     attrs: AttributeSet? = null,
 )  : FrameLayout(context,attrs) {
+    private var lineItemFrame : FrameLayout
     private var lineItemMainLayout : ConstraintLayout
     private var lineItemMainCard : CardView
     private var lineItemLayout : ConstraintLayout
@@ -21,6 +22,7 @@ class LinesItemView(
     private var lineItemActions : Spinner
     init {
         inflate(context , R.layout.lines_list_item , this)
+        lineItemFrame = findViewById(R.id.LineItemFrame)
         lineItemMainLayout = findViewById(R.id.LineItemMainLayout)
         lineItemMainCard = findViewById(R.id.LineItemCard)
         lineItemLayout = findViewById(R.id.LineItemLayout)
