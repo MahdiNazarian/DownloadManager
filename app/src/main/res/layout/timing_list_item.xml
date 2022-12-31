@@ -2,24 +2,23 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LineItemFrame"
+    android:id="@+id/TimingItemFrame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/LineItemMainLayout"
+        android:id="@+id/TimingItemMainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/LineItemCard"
+            android:id="@+id/TimingItemCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/grey_background"
             app:cardCornerRadius="15dp"
             app:cardElevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,45 +27,47 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/LineItemLayout"
+                android:id="@+id/TimingItemLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/LineItemName"
+                    android:id="@+id/TimingItemName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/LineItemNameHolder"
-                    app:layout_constraintBottom_toTopOf="@+id/LineItemDescription"
+                    android:text="@string/TimingItemNameHolder"
+                    app:layout_constraintBottom_toTopOf="@+id/TimingItemDateCreated"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/LineItemActions"
+                    app:layout_constraintStart_toEndOf="@+id/TimingItemActions"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/LineItemDescription"
+                    android:id="@+id/TimingItemDateCreated"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:text="@string/LineItemDescription"
+                    android:text="@string/TimingItemDateCreated"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <Spinner
-                    android:id="@+id/LineItemActions"
+                    android:id="@+id/TimingItemActions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
-                    android:contentDescription="@string/LineItemActionsDescription"
-                    app:layout_constraintBottom_toTopOf="@+id/LineItemDescription"
+                    android:contentDescription="@string/TimingItemActionsDescription"
+                    app:layout_constraintBottom_toTopOf="@+id/TimingItemDateCreated"
+                    app:layout_constraintEnd_toStartOf="@+id/TimingItemName"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="TouchTargetSizeCheck" />

@@ -23,4 +23,7 @@
     <string name="LineItemNameHolder">نام صف</string>
     <string name="LineItemDescription"> تعداد : %1$s</string>
     <string name="LineItemActionsDescription">عملیات های صف</string>
+    <string name="TimingItemNameHolder">نام زمانبندی</string>
+    <string name="TimingItemDateCreated">تاریخ ایجاد : %1$s</string>
+    <string name="TimingItemActionsDescription">عملیات های زمانبندی</string>
 </resources>
