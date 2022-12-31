@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">DownloadManager</string>
+    <string name="DownloadLinesButtonIconDesc">DownloadLinesButtonIconDesc</string>
+    <string name="SettingsButtonIconDesc">SettingsButtonIconDesc</string>
+    <string name="DownloadsButtonIconDesc">DownloadsButtonIconDesc</string>
+    <string name="TimingsButtonIconDesc">TimingsButtonIconDesc</string>
+    <string name="StartDownloadButtonIconDesc">StartDownloadButtonIconDesc</string>
+    <string name="UserIconDescription">UserIconDescription</string>
+    <string name="UserGreet1">سلام کاربر گرامی!</string>
+    <string name="UserGreet2">به نرم افزار مدیریت دانلود خوش آمدید.</string>
+    <string name="MenuDescription">MenuDescription</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="downloadItemName">موزیک پلیر</string>
+    <string name="downloadItemStatusText">درحال دانلود شده</string>
+    <string name="DownloadItemPercentageText">%1$s &#8453;</string>
+    <string name="DownloadFirstAction">DownloadFirstAction</string>
+    <string name="DownloadSecondAction">DownloadSecondAction</string>
+    <string name="DownloadSpeedText">2MB/S</string>
+    <string name="DownloadFileSizeText">2MB</string>
+    <string name="DownloadedFileSizeText">1.6MB</string>
+    <string name="DownloadsListTitleText">دانلود ها</string>
+    <string name="LineItemNameHolder">نام صف</string>
+    <string name="LineItemDescription"> تعداد : %1$s</string>
+    <string name="LineItemActionsDescription">عملیات های صف</string>
+</resources>

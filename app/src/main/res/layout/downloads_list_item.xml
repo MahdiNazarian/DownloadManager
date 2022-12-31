@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/DownloadItemFrame"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/DownloadItemMainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/DownloadItemCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/grey_background"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/DownloadItemLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/DownloadItemIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/download_icon" />
+
+                <TextView
+                    android:id="@+id/DownloadItemName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/downloadItemName"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/DownloadProgressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/DownloadProgressBar"
+                    app:layout_constraintStart_toEndOf="@+id/DownloadItemStatus"
+                    app:layout_constraintTop_toTopOf="@+id/DownloadItemIcon" />
+
+                <TextView
+                    android:id="@+id/DownloadItemStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/downloadItemStatusText"
+                    android:textColor="@color/main_blue"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/DownloadProgressBar"
+                    app:layout_constraintStart_toStartOf="@+id/DownloadProgressBar"
+                    app:layout_constraintTop_toTopOf="@+id/DownloadItemIcon" />
+
+                <TextView
+                    android:id="@+id/DownloadItemPercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/DownloadItemPercentageText"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/DownloadProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:progressDrawable="@drawable/progress_bar_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/DownloadItemIcon"
+                    app:layout_constraintStart_toEndOf="@+id/DownloadItemPercentage"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/FirstDownloadAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grey_background"
+                    android:contentDescription="@string/DownloadFirstAction"
+                    app:layout_constraintBottom_toBottomOf="@+id/DownloadItemIcon"
+                    app:layout_constraintEnd_toEndOf="@+id/DownloadProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/DownloadProgressBar"
+                    app:srcCompat="@drawable/pause_icon"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <ImageButton
+                    android:id="@+id/SecondDownlodAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:background="@color/grey_background"
+                    android:contentDescription="@string/DownloadSecondAction"
+                    app:layout_constraintBottom_toBottomOf="@+id/DownloadItemIcon"
+                    app:layout_constraintEnd_toStartOf="@+id/FirstDownloadAction"
+                    app:layout_constraintTop_toBottomOf="@+id/DownloadProgressBar"
+                    app:srcCompat="@drawable/cancel_icon"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/DownloadSpeed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/DownloadSpeedText"
+                    android:textColor="@color/main_blue"
+                    app:layout_constraintBottom_toBottomOf="@+id/DownloadItemIcon"
+                    app:layout_constraintStart_toStartOf="@+id/DownloadProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/DownloadProgressBar" />
+
+                <TextView
+                    android:id="@+id/DownloadedFileSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/DownloadedFileSizeText"
+                    android:textColor="#8F8F8F"
+                    app:layout_constraintBottom_toBottomOf="@+id/DownloadItemIcon"
+                    app:layout_constraintEnd_toStartOf="@+id/SecondDownlodAction"
+                    app:layout_constraintTop_toBottomOf="@+id/DownloadProgressBar" />
+
+                <TextView
+                    android:id="@+id/DownloadSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:text="@string/DownloadFileSizeText"
+                    android:textColor="@color/main_blue"
+                    app:layout_constraintBottom_toBottomOf="@+id/DownloadItemIcon"
+                    app:layout_constraintEnd_toStartOf="@+id/DownloadedFileSize"
+                    app:layout_constraintTop_toBottomOf="@+id/DownloadProgressBar" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
