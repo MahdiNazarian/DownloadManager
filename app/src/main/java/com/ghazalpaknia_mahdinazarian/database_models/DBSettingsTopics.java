@@ -1,6 +1,11 @@
 package com.ghazalpaknia_mahdinazarian.database_models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class DBSettingsTopics {
-    public int ID;
-    public String settingTopicName;
+    @PrimaryKey
+    public int Id;
+    public String SettingTopicName;
 }

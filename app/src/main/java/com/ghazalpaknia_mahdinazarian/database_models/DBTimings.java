@@ -1,18 +1,24 @@
 package com.ghazalpaknia_mahdinazarian.database_models;
 
-import java.util.Date;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.Date;
+@Entity
 public class DBTimings {
-    public int ID;
-    public int downloadType;
-    public boolean startDownloadAtProgramStartup;
-    public Date startTime;
-    public Date finishTime;
-    public boolean dailyDownload;
-    public int retryCount;
-    public boolean disconnectInternet;
-    public boolean speedRestriction;
-    public int downloadSpeed;
-    public boolean shutdownSystem;
-    public boolean closeApps;
+    @PrimaryKey
+    public int Id;
+    public int DownloadType;
+    public boolean StartDownloadAtProgramStartup;
+    public Date StartTime;
+    public Date FinishTime;
+    public boolean DailyDownload;
+    public int RetryCount;
+    public boolean DisconnectInternet;
+    public boolean SpeedRestriction;
+    public int DownloadSpeed;
+    public boolean ShutdownSystem;
+    public boolean CloseApps;
+    public Date DateCreated;
+    public int UserCreatorId;
 }
