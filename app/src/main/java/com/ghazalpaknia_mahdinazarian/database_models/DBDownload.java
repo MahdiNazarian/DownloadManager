@@ -1,11 +1,10 @@
 package com.ghazalpaknia_mahdinazarian.database_models;
 
+import androidx.room.Entity;
+
 import com.ghazalpaknia_mahdinazarian.static_values.StaticValues;
-
+@Entity
 public class DBDownload {
-    public DBDownload(){
-
-    }
     public int ID;
     public String fileName;
     public int lineID;
