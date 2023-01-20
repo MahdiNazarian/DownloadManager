@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="5dp"
+            android:background="@color/main_blue"
+            android:layout_margin="5dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/RegisterNameInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/RegisterNameInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="text" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/RegisterLastNameInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/RegisterLastNameInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="text" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/RegisterEmailInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/RegisterEmailInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="textEmailAddress" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/RegisterPasswordInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/RegisterPasswordInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="textPassword" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/RegisterRepeatPasswordInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/RegisterRepeatPasswordInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="textPassword" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            app:cornerRadius="15dp"
+            android:backgroundTint="@color/main_blue"
+            android:layout_gravity="start"
+            android:text="@string/InsertDownloadLinkButtonText"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="70dp"
+            />
+    </LinearLayout>
+
+</FrameLayout>

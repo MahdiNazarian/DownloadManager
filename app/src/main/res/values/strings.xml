@@ -26,4 +26,15 @@
     <string name="TimingItemNameHolder">نام زمانبندی</string>
     <string name="TimingItemDateCreated">تاریخ ایجاد : %1$s</string>
     <string name="TimingItemActionsDescription">عملیات های زمانبندی</string>
+    <string name="InsertDownloadLinkButtonText">تایید</string>
+    <string name="DrawerEnterText">ورود</string>
+    <string name="DrawerExitText">خروج</string>
+    <string name="DrawerRegisterText">ثبت نام</string>
+    <string name="DrawerBuySubscriptionText">خرید اشتراک</string>
+    <string name="RegisterNameInputHint">نام</string>
+    <string name="RegisterLastNameInputHint">نام خانوادگی</string>
+    <string name="RegisterEmailInputHint">ایمیل</string>
+    <string name="RegisterPasswordInputHint">رمزعبور</string>
+    <string name="RegisterRepeatPasswordInputHint">تکرار رمزعبور</string>
+    <string name="DownloadLinkLinkInputHint">لینک مورد نظر</string>
 </resources>
