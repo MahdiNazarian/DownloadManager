@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 public class DBDownload {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int Id;
     public String FileName;
     public int FileSize;
@@ -21,8 +21,8 @@ public class DBDownload {
     public boolean SpeedRestriction;
     public int DownloadSpeed;
     public String Description;
-    public Date DownloadStartDate;
-    public Date DownloadEndData;
+    public long DownloadStartDate;
+    public long DownloadEndData;
     public int UserId;
     public int LineId;
 }

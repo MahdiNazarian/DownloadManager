@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class DBSettings {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int Id;
     public String SettingName;
     public String SettingValue;

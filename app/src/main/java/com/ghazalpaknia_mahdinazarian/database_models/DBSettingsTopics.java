@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class DBSettingsTopics {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int Id;
     public String SettingTopicName;
 }

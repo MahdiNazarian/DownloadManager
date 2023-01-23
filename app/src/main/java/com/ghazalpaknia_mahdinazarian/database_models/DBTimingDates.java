@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 @Entity
 public class DBTimingDates {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int Id;
     public int TimingId;
-    public Date DownloadDate;
+    public long DownloadDate;
 }

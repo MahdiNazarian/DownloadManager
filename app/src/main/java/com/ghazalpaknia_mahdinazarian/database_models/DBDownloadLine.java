@@ -7,10 +7,10 @@ import java.util.Date;
 
 @Entity
 public class DBDownloadLine {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int Id;
     public String Name;
-    public Date DateCreated;
+    public long DateCreated;
     public int TimingId;
     public int UserCreatorId;
 }

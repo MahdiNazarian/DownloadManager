@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ghazalpaknia_mahdinazarian.fragments.drawer_content"
+    tools:context="com.ghazalpaknia_mahdinazarian.fragments.DrawerContent"
     android:id="@+id/drawer_content_main_layout">
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,8 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="10dp">
+            app:cardElevation="10dp"
+            android:onClick="onDrawerContentLoginClick">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -58,7 +59,7 @@
             android:id="@+id/drawer_content_register_card"
             app:cardCornerRadius="15dp"
             app:cardElevation="10dp"
-            android:onClick="onRegisterClick">
+            android:onClick="onDrawerContentRegisterClick">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -97,7 +98,8 @@
             android:layout_marginHorizontal="10dp"
             android:id="@+id/drawer_content_buy_subscription_card"
             app:cardCornerRadius="15dp"
-            app:cardElevation="10dp">
+            app:cardElevation="10dp"
+            android:onClick="onDrawerContentBuySubscriptionClick">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -136,7 +138,8 @@
             android:layout_marginHorizontal="10dp"
             android:id="@+id/drawer_content_exit_card"
             app:cardCornerRadius="15dp"
-            app:cardElevation="10dp">
+            app:cardElevation="10dp"
+            android:onClick="onDrawerContentLogoutClick">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

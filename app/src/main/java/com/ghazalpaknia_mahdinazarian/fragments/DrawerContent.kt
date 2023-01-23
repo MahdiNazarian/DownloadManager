@@ -1,26 +1,22 @@
 package com.ghazalpaknia_mahdinazarian.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ghazalpaknia_mahdinazarian.Dialoges.RegisterUserBottomSheetDialog
-import com.ghazalpaknia_mahdinazarian.downloadmanager.MainActivity
+import androidx.fragment.app.Fragment
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
 /**
  * A simple [Fragment] subclass.
- * Use the [drawer_content.newInstance] factory method to
+ * Use the [DrawerContent.newInstance] factory method to
  * create an instance of this fragment.
  */
-class drawer_content : Fragment() {
+class DrawerContent : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -40,7 +36,6 @@ class drawer_content : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_drawer_content, container, false)
     }
-
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -53,7 +48,7 @@ class drawer_content : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            drawer_content().apply {
+            DrawerContent().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
@@ -61,7 +56,4 @@ class drawer_content : Fragment() {
             }
     }
 
-    fun onRegisterClick(view: View) {
-        (activity as MainActivity?)!!.onRegisterClickMain()
-    }
 }

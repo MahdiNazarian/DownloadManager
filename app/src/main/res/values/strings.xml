@@ -37,4 +37,5 @@
     <string name="RegisterPasswordInputHint">رمزعبور</string>
     <string name="RegisterRepeatPasswordInputHint">تکرار رمزعبور</string>
     <string name="DownloadLinkLinkInputHint">لینک مورد نظر</string>
+    <string name="SuccessFullDatabaseInsert">اطلاعات با موفقیت ثبت شد</string>
 </resources>

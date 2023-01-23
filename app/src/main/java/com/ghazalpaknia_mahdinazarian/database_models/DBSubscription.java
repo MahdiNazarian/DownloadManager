@@ -7,11 +7,11 @@ import java.util.Date;
 
 @Entity
 public class DBSubscription {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int Id;
     public int SubscriptionType;
     public int SubscriptionStatus;
-    public Date SubscriptionStartDate;
-    public Date SubscriptionEndDate;
+    public long SubscriptionStartDate;
+    public long SubscriptionEndDate;
     public int UserId;
 }

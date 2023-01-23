@@ -5,14 +5,15 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false">
+    android:fitsSystemWindows="false"
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/MainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".MainActivity">
+        >
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/FragmentsContainer"
@@ -206,7 +207,7 @@
         android:layout_gravity="start">
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/drawer_fragment"
-            android:name="com.ghazalpaknia_mahdinazarian.fragments.drawer_content"
+            android:name="com.ghazalpaknia_mahdinazarian.fragments.DrawerContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/NavBar"

@@ -3,15 +3,9 @@ package com.ghazalpaknia_mahdinazarian.downloadmanager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
+import android.widget.EditText
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentContainerView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.ghazalpaknia_mahdinazarian.Dialoges.RegisterUserBottomSheetDialog
-import com.ghazalpaknia_mahdinazarian.app_models.DownloadsItemModel
-import com.ghazalpaknia_mahdinazarian.recylcler_view_adapters.DownloadListItemsAdapter
-import com.ghazalpaknia_mahdinazarian.static_values.StaticValues
+import com.ghazalpaknia_mahdinazarian.dialogs.RegisterUserBottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MainActivity : AppCompatActivity() {
@@ -27,8 +21,13 @@ class MainActivity : AppCompatActivity() {
         val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
         drawer.open()
     }
-    fun onRegisterClickMain(){
+    fun onDrawerContentRegisterClick(view: View){
+        val drawer: DrawerLayout = findViewById(R.id.drawer_layout)
+        drawer.close()
         val registerBottomSheet : BottomSheetDialogFragment = RegisterUserBottomSheetDialog()
         registerBottomSheet.show(supportFragmentManager,registerBottomSheet.tag)
     }
+    fun onDrawerContentLoginClick(view: View){}
+    fun onDrawerContentBuySubscriptionClick(view: View){}
+    fun onDrawerContentLogoutClick(view: View){}
 }
