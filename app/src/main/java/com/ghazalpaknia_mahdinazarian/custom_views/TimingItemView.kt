@@ -7,12 +7,16 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.ghazalpaknia_mahdinazarian.app_models.DownloadsItemModel
+import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
+import com.ghazalpaknia_mahdinazarian.static_values.Helpers
 
 class TimingItemView (
     context: Context,
     attrs: AttributeSet? = null,
 )  : FrameLayout(context,attrs) {
+    private lateinit var timingItemData : DBTimings
     private var timingItemFrame : FrameLayout
     private var timingItemMainLayout : ConstraintLayout
     private var timingItemCard : CardView
@@ -29,5 +33,12 @@ class TimingItemView (
         timingItemName = findViewById(R.id.TimingItemName)
         timingItemDateCreated = findViewById(R.id.TimingItemDateCreated)
         timingItemActions = findViewById(R.id.TimingItemActions)
+    }
+    fun setTimingItem(timingItemData : DBTimings){
+        this.timingItemData = timingItemData
+    }
+    fun setTimingItemsValue(){
+        timingItemName.text = this.timingItemData.TimingName.toString()
+        timingItemDateCreated.text = Helpers.getDate(this.timingItemData.DateCreated,"\"dd/MM/yyyy hh:mm:ss.SSS\"")
     }
 }

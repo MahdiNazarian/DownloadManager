@@ -1,11 +1,18 @@
 package com.ghazalpaknia_mahdinazarian.fragments
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import com.ghazalpaknia_mahdinazarian.database.DownloadManagerDatabase
+import com.ghazalpaknia_mahdinazarian.database_daos.DBUserDao
+import com.ghazalpaknia_mahdinazarian.database_models.DBUsers
+import com.ghazalpaknia_mahdinazarian.downloadmanager.MainActivity
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
+import kotlinx.coroutines.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +27,10 @@ class DrawerContent : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    var SignedInUser : DBUsers? = null
+    private val viewModelJob = SupervisorJob()
+
+    private val viewModelScope : CoroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +46,33 @@ class DrawerContent : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_drawer_content, container, false)
+    }
+
+    override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModelScope.launch {
+            val logInCard : CardView = view.findViewById(R.id.drawer_content_enter_card)
+            val registerCard : CardView = view.findViewById(R.id.drawer_content_register_card)
+            val subscribeCard : CardView = view.findViewById(R.id.drawer_content_buy_subscription_card)
+            val exitCard : CardView = view.findViewById(R.id.drawer_content_exit_card)
+            val db : DownloadManagerDatabase =
+                DownloadManagerDatabase.getInstance(context)
+            val userDao : DBUserDao = db.dbUserDao()
+            withContext(Dispatchers.IO) {
+                SignedInUser = userDao.loggedInUser;
+            }
+            if(SignedInUser != null && SignedInUser!!.loggedIn){
+                logInCard.visibility = View.GONE
+                registerCard.visibility = View.GONE
+                subscribeCard.visibility = View.VISIBLE
+                exitCard.visibility = View.VISIBLE
+            }else{
+                logInCard.visibility = View.VISIBLE
+                registerCard.visibility = View.VISIBLE
+                subscribeCard.visibility = View.GONE
+                exitCard.visibility = View.GONE
+            }
+        }
     }
     companion object {
         /**

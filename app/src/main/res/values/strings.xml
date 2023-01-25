@@ -6,10 +6,10 @@
     <string name="TimingsButtonIconDesc">TimingsButtonIconDesc</string>
     <string name="StartDownloadButtonIconDesc">StartDownloadButtonIconDesc</string>
     <string name="UserIconDescription">UserIconDescription</string>
-    <string name="UserGreet1">سلام کاربر گرامی!</string>
+    <string name="UserGreetDefault">سلام کاربر گرامی!</string>
+    <string name="UserGreetWithName">کاربر عزیز %1$s</string>
     <string name="UserGreet2">به نرم افزار مدیریت دانلود خوش آمدید.</string>
     <string name="MenuDescription">MenuDescription</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="downloadItemName">موزیک پلیر</string>
     <string name="downloadItemStatusText">درحال دانلود شده</string>
@@ -26,7 +26,7 @@
     <string name="TimingItemNameHolder">نام زمانبندی</string>
     <string name="TimingItemDateCreated">تاریخ ایجاد : %1$s</string>
     <string name="TimingItemActionsDescription">عملیات های زمانبندی</string>
-    <string name="InsertDownloadLinkButtonText">تایید</string>
+    <string name="AcceptButtonText" translatable="false">تایید</string>
     <string name="DrawerEnterText">ورود</string>
     <string name="DrawerExitText">خروج</string>
     <string name="DrawerRegisterText">ثبت نام</string>
@@ -38,4 +38,10 @@
     <string name="RegisterRepeatPasswordInputHint">تکرار رمزعبور</string>
     <string name="DownloadLinkLinkInputHint">لینک مورد نظر</string>
     <string name="SuccessFullDatabaseInsert">اطلاعات با موفقیت ثبت شد</string>
+    <string name="LoginEmailInputHint">ایمیل</string>
+    <string name="LoginPasswordInputHint">رمزعبور</string>
+    <string name="UserSharedPreferenceName">UserSharedPreferenceName</string>
+    <string name="DownloadTimingsListTitleText">زمانبندی ها</string>
+    <string name="NoDataFound">هیچ داده ای یافت نشد</string>
+    <string name="AddTimingFloatButtonContentDescription">افزودن زمانبندی</string>
 </resources>

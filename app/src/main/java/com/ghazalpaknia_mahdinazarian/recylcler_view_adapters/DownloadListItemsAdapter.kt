@@ -12,7 +12,7 @@ class DownloadListItemsAdapter(private var downloadItems : List<DownloadsItemMod
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var item : DownloadItemView = DownloadItemView(parent.context)
+        val item : DownloadItemView = DownloadItemView(parent.context)
         item.setLayoutParams(
             ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

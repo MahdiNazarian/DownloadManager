@@ -89,7 +89,7 @@ class RegisterUserBottomSheetDialog : BottomSheetDialogFragment() {
                             user.Password = Helpers.md5(passwordInput.text.toString())
                             user.AccountCreationDate = Calendar.getInstance().timeInMillis
                             try {
-                                withContext(Dispatchers.IO) {userDao.InsertUser(user)}
+                                withContext(Dispatchers.IO) {userDao.Insert(user)}
                                 Toast.makeText(
                                     context ,
                                     R.string.SuccessFullDatabaseInsert ,

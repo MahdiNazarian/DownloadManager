@@ -14,4 +14,5 @@ public class DBUsers {
     public String Name;
     public String LastName;
     public long AccountCreationDate;
+    public boolean loggedIn;
 }

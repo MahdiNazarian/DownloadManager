@@ -17,37 +17,12 @@
             android:background="@color/main_blue"
             android:layout_margin="5dp"
             />
-
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/RegisterNameInputHint"
+            android:hint="@string/LoginEmailInputHint"
             android:textColorHint="@color/main_blue"
-            android:id="@+id/RegisterNameInput"
-            android:paddingHorizontal="10dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/edit_text_background"
-            android:autofillHints=""
-            android:inputType="text" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/RegisterLastNameInputHint"
-            android:textColorHint="@color/main_blue"
-            android:id="@+id/RegisterLastNameInput"
-            android:paddingHorizontal="10dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/edit_text_background"
-            android:autofillHints=""
-            android:inputType="text" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/RegisterEmailInputHint"
-            android:textColorHint="@color/main_blue"
-            android:id="@+id/RegisterEmailInput"
+            android:id="@+id/LoginEmailInput"
             android:paddingHorizontal="10dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="30dp"
@@ -57,21 +32,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/RegisterPasswordInputHint"
+            android:hint="@string/LoginPasswordInputHint"
             android:textColorHint="@color/main_blue"
-            android:id="@+id/RegisterPasswordInput"
-            android:paddingHorizontal="10dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/edit_text_background"
-            android:autofillHints=""
-            android:inputType="textPassword" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/RegisterRepeatPasswordInputHint"
-            android:textColorHint="@color/main_blue"
-            android:id="@+id/RegisterRepeatPasswordInput"
+            android:id="@+id/LoginPasswordInput"
             android:paddingHorizontal="10dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="30dp"
@@ -80,7 +43,7 @@
             android:inputType="textPassword" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/RegisterUserButton"
+            android:id="@+id/LoginUserButton"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"

@@ -8,6 +8,7 @@ import java.util.Date;
 public class DBTimings {
     @PrimaryKey(autoGenerate = true)
     public int Id;
+    public String TimingName;
     public int DownloadType;
     public boolean StartDownloadAtProgramStartup;
     public long StartTime;

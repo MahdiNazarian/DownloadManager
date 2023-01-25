@@ -62,7 +62,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
-                    android:text="@string/UserGreet1"
+                    android:text="@string/UserGreetDefault"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/imageView"
@@ -149,7 +149,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/imageButton7"
                     app:layout_constraintStart_toEndOf="@+id/SettingsButton"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/time" />
+                    app:srcCompat="@drawable/time"
+                    android:onClick="onTimingsPageNavigationClick"/>
 
                 <ImageButton
                     android:id="@+id/imageButton7"
@@ -195,7 +196,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageButton2"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/sort" />
+                    app:srcCompat="@drawable/sort"
+                    android:onClick="onDownloadPageNavigationClick"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 

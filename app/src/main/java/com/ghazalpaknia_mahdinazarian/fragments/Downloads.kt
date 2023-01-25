@@ -64,7 +64,7 @@ class Downloads : Fragment() {
                 5,
             ),
         );
-        val downloadListRecyclerView = view.findViewById<RecyclerView>(R.id.DonwloadsListRecycleView)
+        val downloadListRecyclerView = view.findViewById<RecyclerView>(R.id.DonwloadsTimingsListRecycleView)
         val downloadListAdapter = DownloadListItemsAdapter(downloadItems)
         downloadListRecyclerView.adapter = downloadListAdapter
         downloadListRecyclerView.layoutManager = LinearLayoutManager(context)
