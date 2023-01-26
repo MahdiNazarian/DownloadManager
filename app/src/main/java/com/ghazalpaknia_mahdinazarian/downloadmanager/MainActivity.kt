@@ -22,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.*
 import androidx.fragment.app.FragmentTransaction
 import com.ghazalpaknia_mahdinazarian.fragments.DownloadTimings
+import com.ghazalpaknia_mahdinazarian.fragments.Lines
 
 
 class MainActivity : AppCompatActivity() {
@@ -102,7 +103,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
     fun onDownloadPageNavigationClick(view : View) {
         val downloadFragment : Fragment = Downloads()
         supportFragmentManager.beginTransaction()
@@ -115,6 +115,14 @@ class MainActivity : AppCompatActivity() {
         val timingFragment : Fragment = DownloadTimings()
         supportFragmentManager.beginTransaction()
             .replace(R.id.FragmentsContainer,timingFragment)
+            .setReorderingAllowed(true)
+            .addToBackStack(null) // name can be null
+            .commit();
+    }
+    fun onLinesPageNavigationClick(view : View){
+        val linesFragment : Fragment = Lines()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.FragmentsContainer,linesFragment)
             .setReorderingAllowed(true)
             .addToBackStack(null) // name can be null
             .commit();

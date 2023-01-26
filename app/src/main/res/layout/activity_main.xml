@@ -179,7 +179,8 @@
                     app:layout_constraintEnd_toStartOf="@+id/imageButton3"
                     app:layout_constraintStart_toEndOf="@+id/imageButton7"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_outline_folder_24" />
+                    app:srcCompat="@drawable/ic_outline_folder_24"
+                    android:onClick="onLinesPageNavigationClick"/>
 
                 <ImageButton
                     android:id="@+id/imageButton3"

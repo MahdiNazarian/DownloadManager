@@ -26,7 +26,9 @@
     <string name="TimingItemNameHolder">نام زمانبندی</string>
     <string name="TimingItemDateCreated">تاریخ ایجاد : %1$s</string>
     <string name="TimingItemActionsDescription">عملیات های زمانبندی</string>
-    <string name="AcceptButtonText" translatable="false">تایید</string>
+    <string name="SubmitButtonText">ثبت</string>
+    <string name="AcceptButtonText">تایید</string>
+    <string name="EditButtonText">ویرایش</string>
     <string name="DrawerEnterText">ورود</string>
     <string name="DrawerExitText">خروج</string>
     <string name="DrawerRegisterText">ثبت نام</string>
@@ -44,4 +46,33 @@
     <string name="DownloadTimingsListTitleText">زمانبندی ها</string>
     <string name="NoDataFound">هیچ داده ای یافت نشد</string>
     <string name="AddTimingFloatButtonContentDescription">افزودن زمانبندی</string>
+    <string name="AddTimingIdInputHint">شناسه زمانبندی</string>
+    <string name="AddTimingNameInputHint">نام زمانبندی</string>
+    <string name="AddTimingTypeInputHint">نوع دانلود</string>
+    <string name="AddTimingStartupDownloadCheckHint">شروع دانلودها در زمان شروع برنامه</string>
+    <string name="AddTimingStartDateInputHint">تاریخ شروع</string>
+    <string name="AddTimingStartTimeInputHint">زمان شروع</string>
+    <string name="AddTimingEndTimeInputHint">زمان پایان</string>
+    <string name="AddTimingDailyDownloadInputHint">دانلود روزانه</string>
+    <string name="AddTimingRetryCountInputHint">تعداد دفعات تلاش برای دانلود</string>
+    <string name="AddTimingRestrictSpeedInputHint">محدود کننده سرعت</string>
+    <string name="AddTimingDownloadSpeedInputHint">سرعت دانلود (B/s)</string>
+    <string name="AddTimingDisconnectInternetInputHint">در پایان دانلود ها اینترنت را قطع
+        کن</string>
+    <string name="AddTimingCloseIDMInputHint">بعد از اتمام دانلود ها نرم افزار را ببند</string>
+    <string name="AddTimingCloseAllAppsInputHint">بعد از اتمام دانلود ها تمام برنامه ها را
+        ببند</string>
+    <string name="AddTimingShutdownInputHint">بعد از اتمام دانلود ها دستگاه را خاموش کن</string>
+    <string name="AddTimingEmptyIdError">شناسه زمانبندی نمی تواند خالی باشد</string>
+    <string name="AddTimingEmptyNameError">نام زمانبندی نمی تواند خالی باشد</string>
+    <string name="AddTimingEmptyTypeError">نوع زمانبندی نمی تواند خالی باشد</string>
+    <string-array name="AddTimingTypesArray">
+        <item>دانلود هم زمان</item>
+        <item>سینک کردن متناوب</item>
+    </string-array>
+    <string name="AddLineFloatButtonContentDescription">افزودن صف</string>
+    <string name="DownloadLinesListTitleText">صف ها</string>
+    <string name="EditLineIdInputHint">شناسه صف</string>
+    <string name="AddLineNameInputHint">نام صف</string>
+    <string name="AddLinesTimingInputHint">زمانبندی مربوط صف</string>
 </resources>

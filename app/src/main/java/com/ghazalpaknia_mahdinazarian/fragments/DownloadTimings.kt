@@ -12,9 +12,12 @@ import com.ghazalpaknia_mahdinazarian.database.DownloadManagerDatabase
 import com.ghazalpaknia_mahdinazarian.database_daos.DBTimingsDao
 import com.ghazalpaknia_mahdinazarian.database_daos.DBUserDao
 import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
+import com.ghazalpaknia_mahdinazarian.database_models.DBUsers
+import com.ghazalpaknia_mahdinazarian.dialogs.AddTimingBottomSheetDialog
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
-import com.ghazalpaknia_mahdinazarian.recylcler_view_adapters.DownloadListItemsAdapter
 import com.ghazalpaknia_mahdinazarian.recylcler_view_adapters.TimingListItemsAdapter
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,6 +36,7 @@ class DownloadTimings : Fragment() {
     private var param2 : String? = null
     private val viewModelJob = SupervisorJob()
     private val viewModelScope : CoroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    var SignedInUser : DBUsers? = null
 
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +61,16 @@ class DownloadTimings : Fragment() {
             val db : DownloadManagerDatabase =
                 DownloadManagerDatabase.getInstance(context)
             val timingDao : DBTimingsDao = db.dbTimingsDao()
+            val userDao : DBUserDao = db.dbUserDao()
+            withContext(Dispatchers.IO) {
+                SignedInUser = userDao.loggedInUser;
+            }
             withContext(Dispatchers.IO){
-                timings = timingDao.all
+                if(SignedInUser != null){
+                    timings = timingDao.getAll(SignedInUser!!.Id)
+                }else{
+                    timings = timingDao.getAll(0)
+                }
             }
             if(timings != null && timings!!.isNotEmpty()) {
                 val downloadTimingsListRecyclerView = view.findViewById<RecyclerView>(R.id.DownloadsTimingsListRecycleView)
@@ -66,13 +78,14 @@ class DownloadTimings : Fragment() {
                 downloadTimingsListRecyclerView.adapter = downloadTimingsListAdapter
                 downloadTimingsListRecyclerView.layoutManager = LinearLayoutManager(context)
             }else{
-                val downloadTimingsListRecyclerView = view.findViewById<RecyclerView>(R.id.DonwloadsTimingsListRecycleView)
-                if(downloadTimingsListRecyclerView != null) {
-                    downloadTimingsListRecyclerView.visibility = View.GONE
-                }
                 view.findViewById<TextView>(R.id.NoTimingToShowText).visibility = View.VISIBLE
             }
         }
+        view.findViewById<FloatingActionButton>(R.id.AddNewTimingFloatButton)
+            .setOnClickListener {
+                val addTimingBottomSheet : BottomSheetDialogFragment = AddTimingBottomSheetDialog()
+                addTimingBottomSheet.show(requireActivity().supportFragmentManager , addTimingBottomSheet.tag)
+            }
     }
 
     companion object {

@@ -20,6 +20,7 @@ public class DBTimings {
     public int DownloadSpeed;
     public boolean ShutdownSystem;
     public boolean CloseApps;
+    public boolean CloseIDM;
     public long DateCreated;
     public int UserCreatorId;
 }

@@ -7,4 +7,8 @@ public class StaticValues {
         CANCELED,
         ERROR,
     }
+    public static enum DownloadType{
+        ALL_TOGETHER,
+        SERIALIZED_SYNC
+    }
 }

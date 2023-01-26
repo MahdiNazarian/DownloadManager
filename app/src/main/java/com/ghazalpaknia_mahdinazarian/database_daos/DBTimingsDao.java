@@ -9,6 +9,6 @@ import java.util.List;
 
 @Dao
 public interface DBTimingsDao extends CRUDDao<DBTimings> {
-    @Query("SELECT * FROM DBTimings")
-    List<DBTimings> getAll();
+    @Query("SELECT * FROM DBTimings WHERE UserCreatorId=(:userId)")
+    List<DBTimings> getAll(int userId);
 }
