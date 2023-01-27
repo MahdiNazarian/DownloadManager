@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -21,14 +22,22 @@ import com.ghazalpaknia_mahdinazarian.fragments.Downloads
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.*
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ghazalpaknia_mahdinazarian.ViewModels.MainActivityViewModel
+import com.ghazalpaknia_mahdinazarian.ViewModels.TimingsViewModel
+import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
 import com.ghazalpaknia_mahdinazarian.fragments.DownloadTimings
 import com.ghazalpaknia_mahdinazarian.fragments.Lines
+import com.ghazalpaknia_mahdinazarian.recylcler_view_adapters.TimingListItemsAdapter
 
 
 class MainActivity : AppCompatActivity() {
     private val viewModelJob = SupervisorJob()
     private val viewModelScope : CoroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    var SignedInUser : DBUsers? = null
+    private val model: MainActivityViewModel by viewModels()
+    private var SignedInUser : DBUsers? = null
     lateinit private var starterIntent : Intent
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +50,19 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.IO) {
                 SignedInUser = userDao.loggedInUser;
             }
-            if (SignedInUser != null && SignedInUser!!.loggedIn) {
+            model.singedInUser?.postValue(SignedInUser)
+        }
+        val userObserver = Observer<DBUsers> { newUser ->
+            if (newUser != null && newUser.loggedIn) {
                 findViewById<TextView>(R.id.UserGreet1).text = resources.getString(
                     R.string.UserGreetWithName ,
-                    SignedInUser!!.Name + " " + SignedInUser!!.LastName
+                    newUser.Name + " " + newUser.LastName
                 )
+            }else{
+                findViewById<TextView>(R.id.UserGreet1).text = resources.getString(R.string.UserGreetDefault)
             }
         }
+        model.singedInUser?.observe(this, userObserver)
     }
 
     fun onOpenDrawerClick(view : View) {
@@ -71,6 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onDrawerContentBuySubscriptionClick(view : View) {}
     fun onDrawerContentLogoutClick(view : View) {
+        val drawer : DrawerLayout = findViewById(R.id.drawer_layout)
         val db : DownloadManagerDatabase =
             DownloadManagerDatabase.getInstance(applicationContext)
         val userDao : DBUserDao = db.dbUserDao()
@@ -89,10 +105,8 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-                finish()
-                overridePendingTransition(0 , 0);
-                startActivity(starterIntent)
-                overridePendingTransition(0 , 0);
+                model?.singedInUser?.postValue(null)
+                drawer.close()
             } catch (e : Exception) {
                 Toast.makeText(
                     applicationContext ,

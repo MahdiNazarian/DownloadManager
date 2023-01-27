@@ -11,8 +11,8 @@ public class DBTimings {
     public String TimingName;
     public int DownloadType;
     public boolean StartDownloadAtProgramStartup;
-    public long StartTime;
-    public long FinishTime;
+    public String StartTime;
+    public String FinishTime;
     public boolean DailyDownload;
     public int RetryCount;
     public boolean DisconnectInternet;

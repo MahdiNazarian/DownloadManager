@@ -5,8 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.ghazalpaknia_mahdinazarian.ViewModels.MainActivityViewModel
 import com.ghazalpaknia_mahdinazarian.database.DownloadManagerDatabase
 import com.ghazalpaknia_mahdinazarian.database_daos.DBUserDao
 import com.ghazalpaknia_mahdinazarian.database_models.DBUsers
@@ -27,10 +32,11 @@ class DrawerContent : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var SignedInUser : DBUsers? = null
     private val viewModelJob = SupervisorJob()
 
     private val viewModelScope : CoroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private var model: MainActivityViewModel? = null
+    private var SignedInUser : DBUsers? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,18 +56,22 @@ class DrawerContent : Fragment() {
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        model = ViewModelProvider(requireActivity() as MainActivity)[MainActivityViewModel::class.java]
+        val logInCard : CardView = view.findViewById(R.id.drawer_content_enter_card)
+        val registerCard : CardView = view.findViewById(R.id.drawer_content_register_card)
+        val subscribeCard : CardView = view.findViewById(R.id.drawer_content_buy_subscription_card)
+        val exitCard : CardView = view.findViewById(R.id.drawer_content_exit_card)
         viewModelScope.launch {
-            val logInCard : CardView = view.findViewById(R.id.drawer_content_enter_card)
-            val registerCard : CardView = view.findViewById(R.id.drawer_content_register_card)
-            val subscribeCard : CardView = view.findViewById(R.id.drawer_content_buy_subscription_card)
-            val exitCard : CardView = view.findViewById(R.id.drawer_content_exit_card)
             val db : DownloadManagerDatabase =
                 DownloadManagerDatabase.getInstance(context)
             val userDao : DBUserDao = db.dbUserDao()
             withContext(Dispatchers.IO) {
                 SignedInUser = userDao.loggedInUser;
             }
-            if(SignedInUser != null && SignedInUser!!.loggedIn){
+            model!!.singedInUser?.postValue(SignedInUser)
+        }
+        val userObserver = Observer<DBUsers> { newUser ->
+            if(newUser != null && newUser.loggedIn){
                 logInCard.visibility = View.GONE
                 registerCard.visibility = View.GONE
                 subscribeCard.visibility = View.VISIBLE
@@ -73,6 +83,7 @@ class DrawerContent : Fragment() {
                 exitCard.visibility = View.GONE
             }
         }
+        model!!.singedInUser?.observe(viewLifecycleOwner, userObserver)
     }
     companion object {
         /**

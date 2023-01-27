@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.ghazalpaknia_mahdinazarian.ViewModels.MainActivityViewModel
 import com.ghazalpaknia_mahdinazarian.database.DownloadManagerDatabase
 import com.ghazalpaknia_mahdinazarian.database_daos.DBUserDao
 import com.ghazalpaknia_mahdinazarian.database_models.DBUsers
@@ -30,8 +33,11 @@ class LoginUserBottomSheetDialog : BottomSheetDialogFragment() {
     private val viewModelJob = SupervisorJob()
 
     private val viewModelScope : CoroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private var model: MainActivityViewModel? = null
+    private var SignedInUser : DBUsers? = null
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
         super.onViewCreated(view , savedInstanceState)
+        model = ViewModelProvider(requireActivity() as MainActivity)[MainActivityViewModel::class.java]
         val starterIntent : Intent = Intent(context,MainActivity::class.java)
         val loginEmailInput : EditText = view.findViewById(R.id.LoginEmailInput)
         val loginPasswordInput : EditText = view.findViewById(R.id.LoginPasswordInput)
@@ -77,11 +83,10 @@ class LoginUserBottomSheetDialog : BottomSheetDialogFragment() {
                         try{
                             withContext(Dispatchers.IO){
                                 userDao.Update(registeredUser)
+                                SignedInUser = userDao.loggedInUser
                             }
-                            activity?.finish()
-                            activity?.overridePendingTransition( 0, 0);
-                            startActivity(starterIntent)
-                            activity?.overridePendingTransition( 0, 0);
+                            model?.singedInUser?.postValue(SignedInUser)
+                            dismiss()
                         }catch (e : Exception){
                             Toast.makeText(
                                 context ,

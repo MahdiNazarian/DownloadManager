@@ -78,19 +78,7 @@
             android:layoutDirection="rtl"
             android:checked="false"
             />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/AddTimingStartTimeInputHint"
-            android:textColorHint="@color/main_blue"
-            android:id="@+id/AddTimingStartDateInput"
-            android:paddingHorizontal="10dp"
-            android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/edit_text_background"
-            android:autofillHints=""
-            android:inputType="datetime" />
-        <EditText
+        <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/AddTimingStartTimeInputHint"
@@ -101,8 +89,27 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/edit_text_background"
             android:autofillHints=""
-            android:inputType="time" />
-        <EditText
+            android:inputType="time"
+            android:enabled="true"
+            app:backgroundTint="@color/main_blue"
+            android:textColor="@color/main_blue"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/AddTimingStartDateInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/AddTimingStartDateInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="datetime"
+            android:enabled="true"
+            app:backgroundTint="@color/main_blue"
+            android:textColor="@color/main_blue"/>
+        <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/AddTimingEndTimeInputHint"
@@ -113,7 +120,11 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/edit_text_background"
             android:autofillHints=""
-            android:inputType="datetime" />
+            android:inputType="datetime"
+            android:enabled="true"
+            app:backgroundTint="@color/main_blue"
+            android:textColor="@color/main_blue"
+            />
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/AddTimingDailyDownloadCheck"
             android:layout_width="match_parent"

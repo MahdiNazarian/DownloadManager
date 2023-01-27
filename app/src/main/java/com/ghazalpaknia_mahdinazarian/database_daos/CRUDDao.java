@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface CRUDDao<T> {
     @Insert
-    void Insert(T obj);
+    long Insert(T obj);
     @Update
-    void Update(T obj);
+    int Update(T obj);
     @Delete
-    void Delete(T obj);
+    int Delete(T obj);
 }

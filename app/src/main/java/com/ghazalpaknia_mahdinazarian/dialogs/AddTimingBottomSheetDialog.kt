@@ -9,6 +9,7 @@ import com.ghazalpaknia_mahdinazarian.database.DownloadManagerDatabase
 import com.ghazalpaknia_mahdinazarian.database_daos.DBTimingDatesDao
 import com.ghazalpaknia_mahdinazarian.database_daos.DBTimingsDao
 import com.ghazalpaknia_mahdinazarian.database_daos.DBUserDao
+import com.ghazalpaknia_mahdinazarian.database_models.DBTimingDates
 import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
 import com.ghazalpaknia_mahdinazarian.database_models.DBUsers
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
@@ -47,9 +48,9 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
         val addTimingNameInput : EditText = view.findViewById(R.id.AddTimingNameInput)
         val addTimingTypeInput : Spinner = view.findViewById(R.id.AddTimingTypeInput)
         val addTimingStartDownloadStartup : SwitchMaterial = view.findViewById(R.id.AddTimingStartDownloadAtStartup)
-        val addTimingStartDateInput : EditText = view.findViewById(R.id.AddTimingStartDateInput)
-        val addTimingStartTimeInput : EditText = view.findViewById(R.id.AddTimingStartTimeInput)
-        val addTimingEndTimeInput : EditText = view.findViewById(R.id.AddTimingEndTimeInput)
+        val addTimingStartDateInput : MaterialButton = view.findViewById(R.id.AddTimingStartDateInput)
+        val addTimingStartTimeInput : MaterialButton = view.findViewById(R.id.AddTimingStartTimeInput)
+        val addTimingEndTimeInput : MaterialButton = view.findViewById(R.id.AddTimingEndTimeInput)
         val addTimingDailyDownloadCheck : SwitchMaterial = view.findViewById(R.id.AddTimingDailyDownloadCheck)
         val addTimingRetryCountInput : EditText = view.findViewById(R.id.AddTimingRetryCountInput)
         val addTimingSpeedRestrictionCheck : SwitchMaterial = view.findViewById(R.id.AddTimingSpeedRestrictionCheck)
@@ -63,6 +64,18 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
         var editTimingIdNull : Boolean = false
         var addTimingNameNull : Boolean = false
         var addTimingTypeNull : Boolean = false
+        addTimingStartTimeInput.setOnClickListener {
+            val timePicker : TimePickerDialogBox = TimePickerDialogBox(it as MaterialButton)
+            timePicker.show(requireActivity().supportFragmentManager,"timepicker")
+        }
+        addTimingEndTimeInput.setOnClickListener {
+            val timePicker : TimePickerDialogBox = TimePickerDialogBox(it as MaterialButton)
+            timePicker.show(requireActivity().supportFragmentManager,"timepicker")
+        }
+        addTimingStartDateInput.setOnClickListener {
+            val datePicker : DatePickerDialogBox = DatePickerDialogBox(it as MaterialButton)
+            datePicker.show(requireActivity().supportFragmentManager,"DatePicker")
+        }
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.AddTimingTypesArray,
@@ -87,14 +100,79 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
                 val timingDao : DBTimingsDao = db.dbTimingsDao()
                 val timingDatesDao : DBTimingDatesDao = db.dbTimingDatesDao()
                 val insertTiming : DBTimings = DBTimings()
+                val insertTimingDate : DBTimingDates = DBTimingDates()
                 insertTiming.TimingName = addTimingNameInput.text.toString()
                 insertTiming.DownloadType = downloadTypeSelected
                 insertTiming.StartDownloadAtProgramStartup = addTimingStartDownloadStartup.isChecked
-                if(addTimingStartTimeInput.text == null || addTimingStartTimeInput.text.toString() == "")
-                    insertTiming.StartTime = 0
+                if(addTimingStartTimeInput.text == null || addTimingStartTimeInput.text.toString() == "" || addTimingStartTimeInput.text == getString(R.string.AddTimingStartTimeInputHint))
+                    insertTiming.StartTime = ""
                 else
                     insertTiming.StartTime = addTimingStartTimeInput.text.toString()
-                        .toLong()
+                if(addTimingEndTimeInput.text == null || addTimingEndTimeInput.text.toString() == "" || addTimingEndTimeInput.text == getString(R.string.AddTimingEndTimeInputHint))
+                    insertTiming.FinishTime = ""
+                else
+                    insertTiming.FinishTime = addTimingEndTimeInput.text.toString()
+                insertTiming.DailyDownload = addTimingDailyDownloadCheck.isChecked
+                if(addTimingRetryCountInput.text == null || addTimingRetryCountInput.text.toString() == "")
+                    insertTiming.RetryCount = 0
+                else
+                    insertTiming.RetryCount = addTimingRetryCountInput.text.toString().toInt()
+                insertTiming.SpeedRestriction = addTimingSpeedRestrictionCheck.isChecked
+                if(addTimingDownloadSpeedInput.text == null || addTimingDownloadSpeedInput.text.toString() == "")
+                    insertTiming.DownloadSpeed = 0
+                else
+                    insertTiming.DownloadSpeed = addTimingDownloadSpeedInput.text.toString().toInt()
+                insertTiming.DisconnectInternet = addTimingDisconnectInternetCheck.isChecked
+                insertTiming.CloseIDM = addTimingCloseIdmCheck.isChecked
+                insertTiming.CloseApps = addTimingCloseAppsCheck.isChecked
+                insertTiming.ShutdownSystem = addTimingShutdownCheck.isChecked
+                insertTiming.DateCreated = Calendar.getInstance().timeInMillis
+                if(SignedInUser != null)
+                    insertTiming.UserCreatorId = SignedInUser!!.Id
+                else
+                    insertTiming.UserCreatorId = 0
+                viewModelScope.launch {
+                    try {
+                        withContext(Dispatchers.IO) {
+                            val timingId : Long = timingDao.Insert(insertTiming)
+                            insertTimingDate.TimingId = timingId.toInt()
+                            if (addTimingStartDateInput.text == null || addTimingStartDateInput.text == "" || addTimingStartDateInput.text == getString(
+                                    R.string.AddTimingStartDateInputHint
+                                )
+                            )
+                                insertTimingDate.DownloadDate = 0
+                            else {
+                                val downloadDate : List<String> =
+                                    addTimingStartDateInput.text.split("/")
+                                val downloadDateYear : Int = downloadDate.first().toInt()
+                                val downloadDateMonth : Int =
+                                    downloadDate.elementAt(1).toInt() - 1
+                                val downloadDateDay : Int = downloadDate.last().toInt()
+                                val calendar : Calendar = Calendar.getInstance()
+                                calendar.set(
+                                    downloadDateYear ,
+                                    downloadDateMonth ,
+                                    downloadDateDay
+                                )
+                                insertTimingDate.DownloadDate = calendar.timeInMillis
+                                timingDatesDao.Insert(insertTimingDate)
+                            }
+                        }
+                        Toast.makeText(
+                            context ,
+                            resources.getString(R.string.InsertTimingSuccessMessage) ,
+                            Toast.LENGTH_LONG
+                        )
+                            .show();
+                    }catch (e : Exception){
+                        Toast.makeText(
+                            context ,
+                            e.message.toString() ,
+                            Toast.LENGTH_LONG
+                        )
+                            .show();
+                    }
+                }
             }
         }
     }
