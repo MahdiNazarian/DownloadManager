@@ -83,4 +83,6 @@
         <item>ویرایش</item>
         <item>حذف</item>
     </string-array>
+    <string name="InsertDownloadLineSuccessMessage">صف دانلود با موفقیت ثبت شد</string>
+    <string name="DeleteDownloadLineSuccessMessage">صف دانلود با موفقیت حذف شد</string>
 </resources>

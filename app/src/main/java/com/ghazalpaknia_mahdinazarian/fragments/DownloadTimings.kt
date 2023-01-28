@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ghazalpaknia_mahdinazarian.ViewModels.TimingsViewModel
+import com.ghazalpaknia_mahdinazarian.ViewModels.MainActivityViewModel
 import com.ghazalpaknia_mahdinazarian.database.DownloadManagerDatabase
 import com.ghazalpaknia_mahdinazarian.database_daos.DBTimingsDao
 import com.ghazalpaknia_mahdinazarian.database_daos.DBUserDao
 import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
 import com.ghazalpaknia_mahdinazarian.database_models.DBUsers
 import com.ghazalpaknia_mahdinazarian.dialogs.AddTimingBottomSheetDialog
+import com.ghazalpaknia_mahdinazarian.downloadmanager.MainActivity
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
 import com.ghazalpaknia_mahdinazarian.recylcler_view_adapters.TimingListItemsAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -39,8 +41,7 @@ class DownloadTimings : Fragment() {
     private val viewModelJob = SupervisorJob()
     private val viewModelScope : CoroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     var SignedInUser : DBUsers? = null
-    private val model: TimingsViewModel = TimingsViewModel()
-
+    private var model : MainActivityViewModel? = null
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -59,11 +60,10 @@ class DownloadTimings : Fragment() {
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-        var timings : List<DBTimings>?
+        model = ViewModelProvider(requireActivity() as MainActivity)[MainActivityViewModel::class.java]
         viewModelScope.launch {
             val db : DownloadManagerDatabase =
                 DownloadManagerDatabase.getInstance(context)
-            val timingDao : DBTimingsDao = db.dbTimingsDao()
             val userDao : DBUserDao = db.dbUserDao()
             withContext(Dispatchers.IO) {
                 SignedInUser = userDao.loggedInUser;
@@ -78,16 +78,26 @@ class DownloadTimings : Fragment() {
         val timingsObserver = Observer<List<DBTimings>> { newDBTimings ->
             if(newDBTimings != null && newDBTimings.isNotEmpty()) {
                 val downloadTimingsListRecyclerView = requireView().findViewById<RecyclerView>(R.id.DownloadsTimingsListRecycleView)
+                downloadTimingsListRecyclerView.visibility = View.VISIBLE
                 val downloadTimingsListAdapter = TimingListItemsAdapter(newDBTimings)
                 downloadTimingsListRecyclerView.adapter = downloadTimingsListAdapter
                 downloadTimingsListRecyclerView.layoutManager = LinearLayoutManager(context)
+                requireView().findViewById<TextView>(R.id.NoTimingToShowText).visibility = View.GONE
             }else{
+                val downloadTimingsListRecyclerView = requireView().findViewById<RecyclerView>(R.id.DownloadsTimingsListRecycleView)
+                downloadTimingsListRecyclerView.visibility = View.GONE
                 requireView().findViewById<TextView>(R.id.NoTimingToShowText).visibility = View.VISIBLE
+            }
+        }
+        val userObserver = Observer<DBUsers> {  newUser ->
+            viewModelScope.launch {
+                refreshTimingRecycleViewItem()
             }
         }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        model.timings.observe(viewLifecycleOwner, timingsObserver)
+        model!!.timings?.observe(viewLifecycleOwner, timingsObserver)
+        model!!.singedInUser?.observe(viewLifecycleOwner , userObserver)
     }
     private fun refreshTimingRecycleViewItem(){
         val db : DownloadManagerDatabase =
@@ -96,13 +106,13 @@ class DownloadTimings : Fragment() {
         var timings : List<DBTimings>?
         viewModelScope.launch {
             withContext(Dispatchers.IO){
-                if(SignedInUser != null){
-                    timings = timingDao.getAll(SignedInUser!!.Id)
+                if(model!!.singedInUser?.value != null){
+                    timings = timingDao.getAll(model!!.singedInUser?.value!!.Id)
                 }else{
                     timings = timingDao.getAll(0)
                 }
             }
-            model.timings.value = timings
+            model!!.timings?.postValue(timings)
         }
     }
 

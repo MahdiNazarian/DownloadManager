@@ -6,12 +6,14 @@ import android.view.View
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.ghazalpaknia_mahdinazarian.ViewModels.TimingsViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.ghazalpaknia_mahdinazarian.ViewModels.MainActivityViewModel
 import com.ghazalpaknia_mahdinazarian.database.DownloadManagerDatabase
 import com.ghazalpaknia_mahdinazarian.database_daos.DBTimingDatesDao
 import com.ghazalpaknia_mahdinazarian.database_daos.DBTimingsDao
 import com.ghazalpaknia_mahdinazarian.database_models.DBTimingDates
 import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
+import com.ghazalpaknia_mahdinazarian.downloadmanager.MainActivity
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
 import com.ghazalpaknia_mahdinazarian.static_values.Helpers
 import kotlinx.coroutines.*
@@ -30,7 +32,7 @@ class TimingItemView (
     private var timingItemName : TextView
     private var timingItemDateCreated : TextView
     private var timingItemActions : Spinner
-    private val model: TimingsViewModel = TimingsViewModel()
+    private var model: MainActivityViewModel?
     init {
         inflate(context , R.layout.timing_list_item , this)
         timingItemFrame = findViewById(R.id.TimingItemFrame)
@@ -40,6 +42,7 @@ class TimingItemView (
         timingItemName = findViewById(R.id.TimingItemName)
         timingItemDateCreated = findViewById(R.id.TimingItemDateCreated)
         timingItemActions = findViewById(R.id.TimingItemActions)
+        model = ViewModelProvider(context  as MainActivity)[MainActivityViewModel::class.java]
     }
     fun setTimingItem(timingItemData : DBTimings){
         this.timingItemData = timingItemData
@@ -53,6 +56,7 @@ class TimingItemView (
             // Apply the adapter to the spinner
             timingItemActions.adapter = adapter
         }
+        timingItemActions.onItemSelectedListener = this
     }
     fun setTimingItemsValue(){
         timingItemName.text = this.timingItemData.TimingName.toString()
@@ -65,7 +69,7 @@ class TimingItemView (
         when (parent.selectedItemPosition) {
             0 ->{}
             1 -> {
-
+                deleteTimingItem(this.timingItemData)
             }
         }
     }
@@ -78,14 +82,16 @@ class TimingItemView (
             DownloadManagerDatabase.getInstance(context)
         val timingDao : DBTimingsDao = db.dbTimingsDao()
         val timingDatesDao : DBTimingDatesDao = db.dbTimingDatesDao()
-        var deleteTimingDate : DBTimingDates = DBTimingDates()
+        var deleteTimingDate : DBTimingDates? = null
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO){
                     deleteTimingDate = timingDatesDao.getTimingDateByTimingId(dbTiming.Id)
-                    timingDatesDao.Delete(deleteTimingDate)
+                    if(deleteTimingDate != null)
+                        timingDatesDao.Delete(deleteTimingDate)
                     timingDao.Delete(dbTiming)
                 }
+                refreshTimingRecycleViewItem()
                 Toast.makeText(
                     context ,
                     resources.getString(R.string.DeleteTimingSuccessMessage) ,
@@ -93,6 +99,7 @@ class TimingItemView (
                 )
                     .show();
             }catch (e : Exception){
+                refreshTimingRecycleViewItem()
                 Toast.makeText(
                     context ,
                     e.message.toString() ,
@@ -100,6 +107,22 @@ class TimingItemView (
                 )
                     .show();
             }
+        }
+    }
+    private fun refreshTimingRecycleViewItem(){
+        val db : DownloadManagerDatabase =
+            DownloadManagerDatabase.getInstance(context)
+        val timingDao : DBTimingsDao = db.dbTimingsDao()
+        var timings : List<DBTimings>? = null
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                if(model!!.singedInUser?.value != null){
+                    timings = timingDao.getAll(model!!.singedInUser?.value!!.Id)
+                }else{
+                    timings = timingDao.getAll(0)
+                }
+            }
+            model!!.timings?.postValue(timings)
         }
     }
 }

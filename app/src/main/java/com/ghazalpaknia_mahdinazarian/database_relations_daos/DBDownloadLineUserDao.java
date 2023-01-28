@@ -2,6 +2,9 @@ package com.ghazalpaknia_mahdinazarian.database_relations_daos;
 
 import androidx.room.Dao;
 
+import com.ghazalpaknia_mahdinazarian.database_daos.CRUDDao;
+import com.ghazalpaknia_mahdinazarian.database_relations.DBDownloadLineUser;
+
 @Dao
-public interface DBDownloadLineUserDao {
+public interface DBDownloadLineUserDao extends CRUDDao<DBDownloadLineUser> {
 }

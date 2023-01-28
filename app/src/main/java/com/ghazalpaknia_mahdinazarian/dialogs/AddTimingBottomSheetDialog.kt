@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.lifecycle.ViewModelProvider
+import com.ghazalpaknia_mahdinazarian.ViewModels.MainActivityViewModel
 import com.ghazalpaknia_mahdinazarian.database.DownloadManagerDatabase
 import com.ghazalpaknia_mahdinazarian.database_daos.DBTimingDatesDao
 import com.ghazalpaknia_mahdinazarian.database_daos.DBTimingsDao
@@ -12,6 +14,7 @@ import com.ghazalpaknia_mahdinazarian.database_daos.DBUserDao
 import com.ghazalpaknia_mahdinazarian.database_models.DBTimingDates
 import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
 import com.ghazalpaknia_mahdinazarian.database_models.DBUsers
+import com.ghazalpaknia_mahdinazarian.downloadmanager.MainActivity
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
@@ -24,6 +27,7 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
     private val viewModelScope : CoroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private var downloadTypeSelected : Int = 0
     var SignedInUser : DBUsers? = null
+    private var model : MainActivityViewModel? = null
     override fun onCreateView(
         inflater : LayoutInflater ,
         container : ViewGroup? ,
@@ -36,14 +40,8 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) {
         super.onViewCreated(view , savedInstanceState)
-        viewModelScope.launch {
-            val db : DownloadManagerDatabase =
-                DownloadManagerDatabase.getInstance(context)
-            val userDao : DBUserDao = db.dbUserDao()
-            withContext(Dispatchers.IO) {
-                SignedInUser = userDao.loggedInUser;
-            }
-        }
+        model = ViewModelProvider(requireActivity() as MainActivity)[MainActivityViewModel::class.java]
+        SignedInUser = model!!.singedInUser?.value
         val editTimingIdInput : EditText = view.findViewById(R.id.EditTimingIdInput)
         val addTimingNameInput : EditText = view.findViewById(R.id.AddTimingNameInput)
         val addTimingTypeInput : Spinner = view.findViewById(R.id.AddTimingTypeInput)
@@ -86,6 +84,7 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
             // Apply the adapter to the spinner
             addTimingTypeInput.adapter = adapter
         }
+        addTimingTypeInput.onItemSelectedListener = this
         addTimingButton.setOnClickListener {
             if(addTimingNameInput.text == null || addTimingNameInput.text.toString() == ""){
                 addTimingNameInput.error = resources.getString(R.string.AddTimingEmptyNameError);
@@ -132,6 +131,7 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
                 else
                     insertTiming.UserCreatorId = 0
                 viewModelScope.launch {
+                    var timings : List<DBTimings>
                     try {
                         withContext(Dispatchers.IO) {
                             val timingId : Long = timingDao.Insert(insertTiming)
@@ -144,10 +144,10 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
                             else {
                                 val downloadDate : List<String> =
                                     addTimingStartDateInput.text.split("/")
-                                val downloadDateYear : Int = downloadDate.first().toInt()
+                                val downloadDateYear : Int = downloadDate.first().trim().toInt()
                                 val downloadDateMonth : Int =
-                                    downloadDate.elementAt(1).toInt() - 1
-                                val downloadDateDay : Int = downloadDate.last().toInt()
+                                    downloadDate.elementAt(1).trim().toInt() - 1
+                                val downloadDateDay : Int = downloadDate.last().trim().toInt()
                                 val calendar : Calendar = Calendar.getInstance()
                                 calendar.set(
                                     downloadDateYear ,
@@ -155,9 +155,11 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
                                     downloadDateDay
                                 )
                                 insertTimingDate.DownloadDate = calendar.timeInMillis
-                                timingDatesDao.Insert(insertTimingDate)
                             }
+                            timingDatesDao.Insert(insertTimingDate)
+                            timings = if(SignedInUser!=null) timingDao.getAll(SignedInUser!!.Id) else timingDao.getAll(0)
                         }
+                        model!!.timings?.postValue(timings)
                         Toast.makeText(
                             context ,
                             resources.getString(R.string.InsertTimingSuccessMessage) ,
@@ -165,6 +167,8 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
                         )
                             .show();
                     }catch (e : Exception){
+                        timings = if(SignedInUser!=null) timingDao.getAll(SignedInUser!!.Id) else timingDao.getAll(0)
+                        model!!.timings?.postValue(timings)
                         Toast.makeText(
                             context ,
                             e.message.toString() ,

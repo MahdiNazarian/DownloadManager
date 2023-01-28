@@ -15,4 +15,10 @@ public interface CRUDDao<T> {
     int Update(T obj);
     @Delete
     int Delete(T obj);
+    @Insert
+    void InsertAll(List<T> objects);
+    @Delete
+    int DeleteAll(List<T> objects);
+    @Update
+    int UpdateAll(List<T> objects);
 }

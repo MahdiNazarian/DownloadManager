@@ -1,7 +1,5 @@
 package com.ghazalpaknia_mahdinazarian.downloadmanager
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,10 +7,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.ghazalpaknia_mahdinazarian.database.DownloadManagerDatabase
 import com.ghazalpaknia_mahdinazarian.database_daos.DBUserDao
 import com.ghazalpaknia_mahdinazarian.database_models.DBUsers
@@ -21,16 +17,10 @@ import com.ghazalpaknia_mahdinazarian.dialogs.RegisterUserBottomSheetDialog
 import com.ghazalpaknia_mahdinazarian.fragments.Downloads
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.*
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ghazalpaknia_mahdinazarian.ViewModels.MainActivityViewModel
-import com.ghazalpaknia_mahdinazarian.ViewModels.TimingsViewModel
-import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
 import com.ghazalpaknia_mahdinazarian.fragments.DownloadTimings
 import com.ghazalpaknia_mahdinazarian.fragments.Lines
-import com.ghazalpaknia_mahdinazarian.recylcler_view_adapters.TimingListItemsAdapter
 
 
 class MainActivity : AppCompatActivity() {
@@ -38,11 +28,9 @@ class MainActivity : AppCompatActivity() {
     private val viewModelScope : CoroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private val model: MainActivityViewModel by viewModels()
     private var SignedInUser : DBUsers? = null
-    lateinit private var starterIntent : Intent
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        starterIntent = Intent(applicationContext , this::class.java)
         viewModelScope.launch {
             val db : DownloadManagerDatabase =
                 DownloadManagerDatabase.getInstance(applicationContext)
@@ -105,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
-                model?.singedInUser?.postValue(null)
+                model.singedInUser?.postValue(null)
                 drawer.close()
             } catch (e : Exception) {
                 Toast.makeText(
