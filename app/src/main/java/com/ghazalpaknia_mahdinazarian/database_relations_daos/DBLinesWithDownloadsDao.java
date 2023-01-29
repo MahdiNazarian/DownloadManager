@@ -7,7 +7,7 @@ import com.ghazalpaknia_mahdinazarian.database_daos.CRUDDao;
 import com.ghazalpaknia_mahdinazarian.database_relations.DBLinesWithDownloads;
 
 @Dao
-public interface DBLinesWithDownloadsDao extends CRUDDao<DBLinesWithDownloads> {
+public interface DBLinesWithDownloadsDao {
     @Query("SELECT * FROM DBDownloadLine WHERE Id=(:Id)")
     DBLinesWithDownloads getLineWithDownloads(int Id);
 }

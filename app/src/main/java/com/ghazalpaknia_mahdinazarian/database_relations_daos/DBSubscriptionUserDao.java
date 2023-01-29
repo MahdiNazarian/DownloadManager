@@ -6,5 +6,5 @@ import com.ghazalpaknia_mahdinazarian.database_daos.CRUDDao;
 import com.ghazalpaknia_mahdinazarian.database_relations.DBSubscriptionUser;
 
 @Dao
-public interface DBSubscriptionUserDao extends CRUDDao<DBSubscriptionUser> {
+public interface DBSubscriptionUserDao {
 }

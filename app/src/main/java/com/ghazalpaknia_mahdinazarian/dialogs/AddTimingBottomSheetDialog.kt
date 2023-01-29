@@ -79,9 +79,7 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
             R.array.AddTimingTypesArray,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
             addTimingTypeInput.adapter = adapter
         }
         addTimingTypeInput.onItemSelectedListener = this
@@ -167,7 +165,9 @@ class AddTimingBottomSheetDialog : BottomSheetDialogFragment() , AdapterView.OnI
                         )
                             .show();
                     }catch (e : Exception){
-                        timings = if(SignedInUser!=null) timingDao.getAll(SignedInUser!!.Id) else timingDao.getAll(0)
+                        withContext(Dispatchers.IO){
+                            timings = if(SignedInUser!=null) timingDao.getAll(SignedInUser!!.Id) else timingDao.getAll(0)
+                        }
                         model!!.timings?.postValue(timings)
                         Toast.makeText(
                             context ,

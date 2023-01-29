@@ -6,5 +6,5 @@ import com.ghazalpaknia_mahdinazarian.database_daos.CRUDDao;
 import com.ghazalpaknia_mahdinazarian.database_relations.DBDownloadLineUser;
 
 @Dao
-public interface DBDownloadLineUserDao extends CRUDDao<DBDownloadLineUser> {
+public interface DBDownloadLineUserDao {
 }

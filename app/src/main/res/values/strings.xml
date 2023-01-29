@@ -77,9 +77,18 @@
     <string name="EditLineIdInputHint">شناسه صف</string>
     <string name="AddLineNameInputHint">نام صف</string>
     <string name="AddLinesTimingInputHint">زمانبندی مربوط صف</string>
+    <string name="AddLinesNameInputNullError">نام صف نمی تواند خالی باشد</string>
+    <string name="AddLineSuccessMessage">صف دانلود با موفقیت ثبت شد</string>
+    <string name="AddLineIdInputNullError">شناسه صف نمیتواند خالی باشد</string>
+    <string name="EditLineSuccessText">ویرایش صف با موفقیت انجام شد</string>
     <string name="HourTemplate">%1$s : %2$s</string>
     <string name="DateTemplate">%1$s / %2$s / %3$s</string>
     <string-array name="CustomViewsSpinnerItemsArray">
+        <item>ویرایش</item>
+        <item>حذف</item>
+    </string-array>
+    <string-array name="DownloadLinesSpinnerItemsArray">
+        <item>شروع صف</item>
         <item>ویرایش</item>
         <item>حذف</item>
     </string-array>

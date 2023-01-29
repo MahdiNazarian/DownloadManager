@@ -6,5 +6,5 @@ import com.ghazalpaknia_mahdinazarian.database_daos.CRUDDao;
 import com.ghazalpaknia_mahdinazarian.database_relations.DBTimingWithDownloadLine;
 
 @Dao
-public interface DBTimingWithDownloadLineDao extends CRUDDao<DBTimingWithDownloadLine> {
+public interface DBTimingWithDownloadLineDao {
 }

@@ -8,7 +8,7 @@ import com.ghazalpaknia_mahdinazarian.static_values.StaticValues;
 import java.util.Date;
 
 @Entity
-public class DBDownload {
+public class DBDownload  {
     @PrimaryKey(autoGenerate = true)
     public int Id;
     public String FileName;

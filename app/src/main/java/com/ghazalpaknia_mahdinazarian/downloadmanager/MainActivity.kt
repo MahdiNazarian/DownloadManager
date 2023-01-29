@@ -19,6 +19,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.*
 import androidx.lifecycle.Observer
 import com.ghazalpaknia_mahdinazarian.ViewModels.MainActivityViewModel
+import com.ghazalpaknia_mahdinazarian.database_daos.DBDownloadLineDao
+import com.ghazalpaknia_mahdinazarian.database_daos.DBTimingsDao
+import com.ghazalpaknia_mahdinazarian.database_models.DBDownloadLine
+import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
 import com.ghazalpaknia_mahdinazarian.fragments.DownloadTimings
 import com.ghazalpaknia_mahdinazarian.fragments.Lines
 
@@ -39,6 +43,8 @@ class MainActivity : AppCompatActivity() {
                 SignedInUser = userDao.loggedInUser;
             }
             model.singedInUser?.postValue(SignedInUser)
+            refreshLineViewItem()
+            refreshTimingViewItem()
         }
         val userObserver = Observer<DBUsers> { newUser ->
             if (newUser != null && newUser.loggedIn) {
@@ -128,5 +134,37 @@ class MainActivity : AppCompatActivity() {
             .setReorderingAllowed(true)
             .addToBackStack(null) // name can be null
             .commit();
+    }
+    private fun refreshLineViewItem(){
+        val db : DownloadManagerDatabase =
+            DownloadManagerDatabase.getInstance(this)
+        val downloadLinesDao : DBDownloadLineDao = db.dbDownloadLineDao()
+        var downloadLines : List<DBDownloadLine>?
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                if(model.singedInUser?.value != null){
+                    downloadLines = downloadLinesDao.getAll(model.singedInUser?.value!!.Id)
+                }else{
+                    downloadLines = downloadLinesDao.getAll(0)
+                }
+            }
+            model.downloadLines?.postValue(downloadLines)
+        }
+    }
+    private fun refreshTimingViewItem(){
+        val db : DownloadManagerDatabase =
+            DownloadManagerDatabase.getInstance(this)
+        val timingDao : DBTimingsDao = db.dbTimingsDao()
+        var timings : List<DBTimings>?
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                if(model.singedInUser?.value != null){
+                    timings = timingDao.getAll(model.singedInUser?.value!!.Id)
+                }else{
+                    timings = timingDao.getAll(0)
+                }
+            }
+            model.timings?.postValue(timings)
+        }
     }
 }

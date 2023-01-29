@@ -19,9 +19,11 @@ import com.ghazalpaknia_mahdinazarian.database_models.DBTimingDates
 import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
 import com.ghazalpaknia_mahdinazarian.database_relations.DBLinesWithDownloads
 import com.ghazalpaknia_mahdinazarian.database_relations_daos.DBLinesWithDownloadsDao
+import com.ghazalpaknia_mahdinazarian.dialogs.AddLineBottomSheetDialog
 import com.ghazalpaknia_mahdinazarian.downloadmanager.MainActivity
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
 import com.ghazalpaknia_mahdinazarian.static_values.Helpers
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.*
 
 class LinesItemView(
@@ -54,7 +56,7 @@ class LinesItemView(
         this.lineItemData = lineItemData
         ArrayAdapter.createFromResource(
             context ,
-            R.array.CustomViewsSpinnerItemsArray,
+            R.array.DownloadLinesSpinnerItemsArray,
             android.R.layout.simple_spinner_item
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears
@@ -80,7 +82,11 @@ class LinesItemView(
     override fun onItemSelected(parent: AdapterView<*> , view: View? , pos: Int , id: Long) {
         when (parent.selectedItemPosition) {
             0 ->{}
-            1 -> {
+            1 ->{
+                val lineBottomSheet : BottomSheetDialogFragment = AddLineBottomSheetDialog(this.lineItemData)
+                lineBottomSheet.show((context as MainActivity).supportFragmentManager , lineBottomSheet.tag)
+            }
+            2 -> {
                 deleteLineItem(this.lineItemData)
             }
         }

@@ -6,5 +6,5 @@ import com.ghazalpaknia_mahdinazarian.database_daos.CRUDDao;
 import com.ghazalpaknia_mahdinazarian.database_relations.DBTimingsWithDates;
 
 @Dao
-public interface DBTimingsWithDatesDao extends CRUDDao<DBTimingsWithDates> {
+public interface DBTimingsWithDatesDao {
 }

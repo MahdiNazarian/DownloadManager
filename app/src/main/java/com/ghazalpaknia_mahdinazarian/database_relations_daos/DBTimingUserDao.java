@@ -6,6 +6,6 @@ import com.ghazalpaknia_mahdinazarian.database_daos.CRUDDao;
 import com.ghazalpaknia_mahdinazarian.database_relations.DBTimingUser;
 
 @Dao
-public interface DBTimingUserDao extends CRUDDao<DBTimingUser> {
+public interface DBTimingUserDao {
 
 }

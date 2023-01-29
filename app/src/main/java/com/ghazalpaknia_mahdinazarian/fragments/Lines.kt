@@ -77,10 +77,10 @@ class Lines : Fragment() {
         }
         view.findViewById<FloatingActionButton>(R.id.AddNewLineFloatButton)
             .setOnClickListener {
-                val lineBottomSheet : BottomSheetDialogFragment = AddLineBottomSheetDialog()
+                val lineBottomSheet : BottomSheetDialogFragment = AddLineBottomSheetDialog(null)
                 lineBottomSheet.show(requireActivity().supportFragmentManager , lineBottomSheet.tag)
             }
-        val timingsObserver = Observer<List<DBDownloadLine>> { newDownloadLine ->
+        val downloadLinesObserver = Observer<List<DBDownloadLine>> { newDownloadLine ->
             if(newDownloadLine != null && newDownloadLine.isNotEmpty()) {
                 val downloadLinesListRecyclerView = requireView().findViewById<RecyclerView>(R.id.DownloadsLinesListRecycleView)
                 downloadLinesListRecyclerView.visibility = View.VISIBLE
@@ -101,7 +101,7 @@ class Lines : Fragment() {
         }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        model!!.downloadLines?.observe(viewLifecycleOwner, timingsObserver)
+        model!!.downloadLines?.observe(viewLifecycleOwner, downloadLinesObserver)
         model!!.singedInUser?.observe(viewLifecycleOwner , userObserver)
     }
     private fun refreshLineViewItem(){
