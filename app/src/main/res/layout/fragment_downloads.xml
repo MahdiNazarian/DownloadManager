@@ -17,7 +17,7 @@
         android:layout_marginBottom="10dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/StartDownloadFloatActionButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DownloadsTimingsListTitle">
@@ -51,5 +51,18 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/DownloadsLinesListHolderCard"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/StartDownloadFloatActionButton"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/main_blue"
+        android:contentDescription="@string/AddDownloadFloatActionButtonContentDescription"
+        android:src="@drawable/plus_icon"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

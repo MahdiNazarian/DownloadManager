@@ -94,4 +94,10 @@
     </string-array>
     <string name="InsertDownloadLineSuccessMessage">صف دانلود با موفقیت ثبت شد</string>
     <string name="DeleteDownloadLineSuccessMessage">صف دانلود با موفقیت حذف شد</string>
+    <string name="DownloadLinkFileNameInputHint">نام فایل</string>
+    <string name="DownloadLinkFileTypeInputHint">نوع فایل</string>
+    <string name="DownloadLinkDownloadLineSelectInputHint">صف مورد نظر</string>
+    <string name="DownloadLinkStartButtonText">شروع</string>
+    <string name="DownloadLinkLaterStartButtonText">بعدا دانلود شود</string>
+    <string name="AddDownloadFloatActionButtonContentDescription">افزودن دانلود</string>
 </resources>

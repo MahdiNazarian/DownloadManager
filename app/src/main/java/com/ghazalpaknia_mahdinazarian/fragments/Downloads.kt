@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ghazalpaknia_mahdinazarian.app_models.DownloadsItemModel
+import com.ghazalpaknia_mahdinazarian.dialogs.AddTimingBottomSheetDialog
+import com.ghazalpaknia_mahdinazarian.dialogs.DownloadLinkBottomSheetDialog
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
 import com.ghazalpaknia_mahdinazarian.recylcler_view_adapters.DownloadListItemsAdapter
 import com.ghazalpaknia_mahdinazarian.static_values.StaticValues
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,6 +72,11 @@ class Downloads : Fragment() {
         val downloadListAdapter = DownloadListItemsAdapter(downloadItems)
         downloadListRecyclerView.adapter = downloadListAdapter
         downloadListRecyclerView.layoutManager = LinearLayoutManager(context)
+        view.findViewById<FloatingActionButton>(R.id.StartDownloadFloatActionButton)
+            .setOnClickListener {
+                val downloadLinkBottomSheetDialog : BottomSheetDialogFragment = DownloadLinkBottomSheetDialog()
+                downloadLinkBottomSheetDialog.show(requireActivity().supportFragmentManager , downloadLinkBottomSheetDialog.tag)
+            }
     }
 
     companion object {

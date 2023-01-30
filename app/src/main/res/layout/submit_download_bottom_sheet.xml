@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="5dp"
+            android:background="@color/main_blue"
+            android:layout_margin="5dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/DownloadLinkLinkInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/DownloadFileLinkInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="text" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/DownloadLinkFileNameInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/DownloadLinkFileNameInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="text" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/DownloadLinkFileTypeInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/DownloadLinkFileTypeInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="text" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_background"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp">
+
+            <Spinner
+                android:id="@+id/DownloadLinkDownloadLineSelectInput"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:contentDescription="@string/DownloadLinkDownloadLineSelectInputHint"
+                android:layoutDirection="rtl"
+                android:textDirection="rtl" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                app:cornerRadius="15dp"
+                android:backgroundTint="@color/main_blue"
+                android:layout_gravity="start"
+                android:text="@string/DownloadLinkStartButtonText"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="70dp"
+                android:id="@+id/DownloadLinkStartButton"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                app:cornerRadius="15dp"
+                android:backgroundTint="@color/main_blue"
+                android:layout_gravity="start"
+                android:text="@string/DownloadLinkLaterStartButtonText"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="70dp"
+                android:id="@+id/DownloadLinkLaterStartButton"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</FrameLayout>
