@@ -29,7 +29,8 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/edit_text_background"
             android:autofillHints=""
-            android:inputType="text" />
+            android:inputType="text"
+            android:enabled="false"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -53,7 +54,8 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/edit_text_background"
             android:autofillHints=""
-            android:inputType="text" />
+            android:inputType="text"
+            android:enabled="false"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,6 +72,19 @@
                 android:layoutDirection="rtl"
                 android:textDirection="rtl" />
         </RelativeLayout>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/DownloadLinkFileSizeInputHint"
+            android:textColorHint="@color/main_blue"
+            android:id="@+id/DownloadLinkFileSizeInput"
+            android:paddingHorizontal="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edit_text_background"
+            android:autofillHints=""
+            android:inputType="text"
+            android:enabled="false"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

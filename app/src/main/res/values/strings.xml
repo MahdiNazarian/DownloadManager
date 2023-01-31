@@ -96,8 +96,13 @@
     <string name="DeleteDownloadLineSuccessMessage">صف دانلود با موفقیت حذف شد</string>
     <string name="DownloadLinkFileNameInputHint">نام فایل</string>
     <string name="DownloadLinkFileTypeInputHint">نوع فایل</string>
+    <string name="DownloadLinkFileSizeInputHint">حجم فایل</string>
     <string name="DownloadLinkDownloadLineSelectInputHint">صف مورد نظر</string>
     <string name="DownloadLinkStartButtonText">شروع</string>
     <string name="DownloadLinkLaterStartButtonText">بعدا دانلود شود</string>
     <string name="AddDownloadFloatActionButtonContentDescription">افزودن دانلود</string>
+    <string name="AddDownloadSuccessMessage">دانلود با موفقیت اضافه شد</string>
+    <string name="NotificationChannelName">Download Manager Notifications</string>
+    <string name="NotificationChannelDescription">Notification Channel For Download Manager
+    App Notifications</string>
 </resources>

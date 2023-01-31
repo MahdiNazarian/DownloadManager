@@ -12,14 +12,14 @@ public class DBDownload  {
     @PrimaryKey(autoGenerate = true)
     public int Id;
     public String FileName;
-    public int FileSize;
+    public long FileSize;
     public String DownloadUrl;
     public StaticValues.DownloadStates DownloadState;
     public int RemainingTime;
-    public int DownloadedSize;
+    public long DownloadedSize;
     public int Progress;
     public boolean SpeedRestriction;
-    public int DownloadSpeed;
+    public long DownloadSpeed;
     public String Description;
     public long DownloadStartDate;
     public long DownloadEndData;

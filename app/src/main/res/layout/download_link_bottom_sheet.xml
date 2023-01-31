@@ -27,7 +27,9 @@
             android:paddingHorizontal="10dp"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/edit_text_background"/>
+            android:background="@drawable/edit_text_background"
+            android:inputType="textLongMessage"
+            android:autofillHints="" />
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="150dp"

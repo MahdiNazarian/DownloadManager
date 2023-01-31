@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.ghazalpaknia_mahdinazarian.app_models.DownloadsItemModel
+import com.ghazalpaknia_mahdinazarian.database_models.DBDownload
 import com.ghazalpaknia_mahdinazarian.downloadmanager.R
 import com.ghazalpaknia_mahdinazarian.static_values.Helpers
 
@@ -17,7 +18,7 @@ class DownloadItemView(
     context: Context,
     attrs: AttributeSet? = null,
 ) : FrameLayout(context,attrs) {
-    private lateinit var downloadItem : DownloadsItemModel
+    private lateinit var downloadItem : DBDownload
     private var downloadItemFrameLayout : FrameLayout
     private var downloadItemMainLayout : ConstraintLayout
     private var downloadItemCard : CardView
@@ -49,16 +50,17 @@ class DownloadItemView(
         downloadItemFileSize  = findViewById(R.id.DownloadSize)
         downloadItemDownloadedSize  = findViewById(R.id.DownloadedFileSize)
     }
-    fun setDownloadItem(downloadItem : DownloadsItemModel){
+
+    fun setDownloadItem(downloadItem : DBDownload){
         this.downloadItem = downloadItem
     }
     fun setDownloadItemValues(){
-        this.downloadItemName.text = this.downloadItem.itemName
-        this.downloadItemStatus.text = this.downloadItem.downloadState.toString()
-        this.downloadItemPercentage.text = resources.getString(R.string.DownloadItemPercentageText,this.downloadItem.downloadProgress.toString())
-        this.downloadItemProgressBar.progress = this.downloadItem.downloadProgress
-        this.downloadItemsDownloadSpeed.text = Helpers.byteConverter(this.downloadItem.downloadSpeed,true)
-        this.downloadItemFileSize.text = Helpers.byteConverter(this.downloadItem.downloadFileSize,false)
-        this.downloadItemDownloadedSize.text = Helpers.byteConverter(this.downloadItem.downloadedFileSize,false)
+        this.downloadItemName.text = this.downloadItem.FileName
+        this.downloadItemStatus.text = this.downloadItem.DownloadState.toString()
+        this.downloadItemPercentage.text = resources.getString(R.string.DownloadItemPercentageText,this.downloadItem.Progress.toString())
+        this.downloadItemProgressBar.setProgress(100,true)
+        this.downloadItemsDownloadSpeed.text = Helpers.byteConverter(this.downloadItem.DownloadSpeed,true)
+        this.downloadItemFileSize.text = Helpers.byteConverter(this.downloadItem.FileSize,false)
+        this.downloadItemDownloadedSize.text = Helpers.byteConverter(this.downloadItem.DownloadedSize,false)
     }
 }

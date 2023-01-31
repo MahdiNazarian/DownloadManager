@@ -52,7 +52,7 @@ class AddLineBottomSheetDialog(private var editLineItem:DBDownloadLine? ) : Bott
         val editLineButton : MaterialButton = view.findViewById(R.id.EditLineButton)
         var editLineIdNull : Boolean = false
         var addLineNameNull : Boolean = false
-        addLinesTimingValue= if(model!!.timings?.value != null) model!!.timings?.value?.first() else null
+        addLinesTimingValue= if(model!!.timings?.value != null && !(model!!.timings?.value?.isEmpty())!!) model!!.timings?.value?.first() else null
         setAddLinesTimingsItems(addLinesTimingInput)
         if(editLineItem != null){
             editLineIdInput.visibility = View.VISIBLE

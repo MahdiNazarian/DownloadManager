@@ -4,9 +4,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ghazalpaknia_mahdinazarian.app_models.DownloadsItemModel
 import com.ghazalpaknia_mahdinazarian.custom_views.DownloadItemView
+import com.ghazalpaknia_mahdinazarian.database_models.DBDownload
 
 
-class DownloadListItemsAdapter(private var downloadItems : List<DownloadsItemModel>) : RecyclerView.Adapter<DownloadListItemsAdapter.ViewHolder>() {
+class DownloadListItemsAdapter(private var downloadItems : List<DBDownload>) : RecyclerView.Adapter<DownloadListItemsAdapter.ViewHolder>() {
     class ViewHolder(var downloadItemView : DownloadItemView) : RecyclerView.ViewHolder(downloadItemView){
 
     }

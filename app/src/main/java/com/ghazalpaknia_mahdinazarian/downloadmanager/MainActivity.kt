@@ -1,6 +1,10 @@
 package com.ghazalpaknia_mahdinazarian.downloadmanager
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -25,6 +29,7 @@ import com.ghazalpaknia_mahdinazarian.database_models.DBDownloadLine
 import com.ghazalpaknia_mahdinazarian.database_models.DBTimings
 import com.ghazalpaknia_mahdinazarian.fragments.DownloadTimings
 import com.ghazalpaknia_mahdinazarian.fragments.Lines
+import com.ghazalpaknia_mahdinazarian.static_values.StaticValues
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        createNotificationChannel()
         viewModelScope.launch {
             val db : DownloadManagerDatabase =
                 DownloadManagerDatabase.getInstance(applicationContext)
@@ -57,6 +63,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
         model.singedInUser?.observe(this, userObserver)
+    }
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.NotificationChannelName)
+            val descriptionText = getString(R.string.NotificationChannelDescription)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(StaticValues.NOTIFICATION_CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
     }
 
     fun onOpenDrawerClick(view : View) {

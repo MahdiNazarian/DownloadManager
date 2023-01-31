@@ -11,4 +11,6 @@ public class StaticValues {
         ALL_TOGETHER,
         SERIALIZED_SYNC
     }
+    public static String NOTIFICATION_CHANNEL_ID = "DownloadManagerNotificationChannelId12345678910";
+    public static String DownloadServiceGetIdExtraKeyName = "DownloadObjectId";
 }
